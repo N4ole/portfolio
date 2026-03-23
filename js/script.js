@@ -26,3 +26,18 @@ applyTheme(getPreferredTheme());
 if (toggleBtn) {
     toggleBtn.addEventListener("click", toggleTheme);
 }
+
+const messageField = document.querySelector("#message");
+const messageCounter = document.querySelector("#message-counter");
+
+if (messageField && messageCounter) {
+    const maxLength = Number(messageField.getAttribute("maxlength") || 1000);
+
+    const updateCounter = () => {
+        const currentLength = messageField.value.length;
+        messageCounter.textContent = `${currentLength}/${maxLength} caractères`;
+    };
+
+    messageField.addEventListener("input", updateCounter);
+    updateCounter();
+}

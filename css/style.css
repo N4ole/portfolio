@@ -153,3 +153,130 @@ footer li {
         grid-template-columns: 1fr;
     }
 }
+
+.contact-wrapper {
+    width: min(760px, calc(100% - 40px));
+    margin: 20px auto 30px;
+}
+
+.contact-card {
+    background-color: var(--surface-color);
+    border: solid 1.5px var(--primary-color);
+    border-radius: 8px;
+    padding: 24px;
+    box-sizing: border-box;
+}
+
+.contact-description {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.contact-form {
+    display: grid;
+    gap: 14px;
+}
+
+.contact-form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.contact-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary-color) 25%, transparent);
+}
+
+.contact-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.contact-form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.contact-submit {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    padding: 10px 16px;
+    cursor: pointer;
+}
+
+.contact-submit:hover {
+    filter: brightness(0.95);
+}
+
+.contact-status {
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    border: 1.5px solid transparent;
+}
+
+.contact-status.success {
+    background-color: #e8f8ef;
+    border-color: var(--secondary-color);
+}
+
+.contact-status.error {
+    background-color: #fdeceb;
+    border-color: var(--accent-color);
+}
+
+[data-theme="dark"] .contact-status.success {
+    background-color: #203327;
+}
+
+[data-theme="dark"] .contact-status.error {
+    background-color: #3b2424;
+}
+
+.honeypot-field {
+    position: absolute;
+    left: -9999px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.char-counter {
+    text-align: right;
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-top: 4px;
+}
+
+@media (max-width: 640px) {
+    .contact-form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-card {
+        padding: 16px;
+    }
+}

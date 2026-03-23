@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Portfolio</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="../index.html">Accueil</a></li>
+            <li><a href="experience.html">Expériences</a></li>
+            <li><a href="form.html">Contact</a></li>
+        </ul>
+        <button class="theme" type="button"><i class="fas fa-adjust"> theme </i></button>
+    </nav>
+
+    <h1 class="titre_1">Contact</h1>
+
+    <main class="contact-wrapper">
+        <section class="contact-card">
+            <p class="contact-description">Remplissez le formulaire ci-dessous pour m'envoyer un message.</p>
+            <div id="contact-status" class="contact-status" hidden></div>
+
+            <form class="contact-form" action="../form_handler.php" method="post" novalidate>
+                <div class="contact-form-row">
+                    <div>
+                        <label for="nom">Nom</label>
+                        <input id="nom" name="nom" type="text" maxlength="100" required>
+                    </div>
+
+                    <div>
+                        <label for="prenom">Prénom</label>
+                        <input id="prenom" name="prenom" type="text" maxlength="100" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" maxlength="190" required>
+                </div>
+
+                <div>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" maxlength="1000" required></textarea>
+                    <p id="message-counter" class="char-counter"></p>
+                </div>
+
+                <input class="honeypot-field" type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+                <div class="contact-form-actions">
+                    <button class="contact-submit" type="submit">Envoyer</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Mon Portfolio. Tous droits réservés.</p>
+        <section class="footer-contact">
+            <h3>mes contacts :</h3>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/eloan-delbroeuve/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                <li><a href="https://github.com/N4ole" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub personnel</a></li>
+                <li><a href="https://github.com/Eloan-Supinfo" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub Supinfo</a></li>
+                <li><a href="mailto:eloandb@icloud.com"><i class="fas fa-envelope"></i> Email</a></li>
+            </ul>
+        </section>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        (function () {
+            const statusBox = document.getElementById("contact-status");
+            const params = new URLSearchParams(window.location.search);
+            const status = params.get("status");
+
+            if (!statusBox || !status) {
+                return;
+            }
+
+            const map = {
+                success: {
+                    css: "success",
+                    text: "Message envoyé avec succès. Merci pour votre contact."
+                },
+                validation_error: {
+                    css: "error",
+                    text: "Vérifiez les champs du formulaire puis réessayez."
+                },
+                db_error: {
+                    css: "error",
+                    text: "Erreur lors de l'enregistrement en base de données."
+                },
+                mail_error: {
+                    css: "error",
+                    text: "Impossible d'envoyer l'email pour le moment."
+                },
+                server_error: {
+                    css: "error",
+                    text: "Une erreur serveur est survenue."
+                }
+            };
+
+            const item = map[status];
+            if (!item) {
+                return;
+            }
+
+            statusBox.hidden = false;
+            statusBox.classList.add(item.css);
+            statusBox.textContent = item.text;
+        })();
+    </script>
+</body>
+</html>
