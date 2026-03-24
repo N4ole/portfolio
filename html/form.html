@@ -25,22 +25,19 @@
             <p class="contact-description">Remplissez le formulaire ci-dessous pour m'envoyer un message.</p>
             <div id="contact-status" class="contact-status" hidden></div>
 
-            <form class="contact-form" action="../form_handler.php" method="post" novalidate>
+            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="fed97b4e-ac6f-42e2-b1a7-8854365c6805">
+
                 <div class="contact-form-row">
                     <div>
-                        <label for="nom">Nom</label>
-                        <input id="nom" name="nom" type="text" maxlength="100" required>
+                        <label for="name">Nom</label>
+                        <input id="name" type="text" name="name" maxlength="100" required>
                     </div>
 
                     <div>
-                        <label for="prenom">Prénom</label>
-                        <input id="prenom" name="prenom" type="text" maxlength="100" required>
+                        <label for="email">Email</label>
+                        <input id="email" type="email" name="email" maxlength="190" required>
                     </div>
-                </div>
-
-                <div>
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email" maxlength="190" required>
                 </div>
 
                 <div>
@@ -49,10 +46,8 @@
                     <p id="message-counter" class="char-counter"></p>
                 </div>
 
-                <input class="honeypot-field" type="text" name="website" value="" tabindex="-1" autocomplete="off" aria-hidden="true">
-
                 <div class="contact-form-actions">
-                    <button class="contact-submit" type="submit">Envoyer</button>
+                    <button class="contact-submit" type="submit">Submit Form</button>
                 </div>
             </form>
         </section>
