@@ -1,3 +1,0 @@
-[2026-03-23 16:34:38] Deployment failed (exit 128): git fetch --all --prune
-fatal: not a git repository (or any parent up to mount point /)
-Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
