@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expériences - Portfolio</title>
+    <meta name="description" content="Expériences d'Eloan Delbroeuve — JSP, bénévolat Croix Rouge.">
+    <title>Expériences — Portfolio</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -13,53 +14,81 @@
     <nav class="navbar">
         <ul>
             <li><a href="../index.html">Accueil</a></li>
-            <li><a href="experience.html">Expériences</a></li>
+            <li><a href="experience.html" class="active">Expériences</a></li>
             <li><a href="form.html">Contact</a></li>
         </ul>
-        <button class="theme" type="button"><i class="fas fa-adjust"> theme </i></button>
+        <button class="theme" type="button">Mode sombre</button>
     </nav>
 
     <h1 class="titre_1">Mes Expériences</h1>
 
     <div class="index-section-container">
-        <section class="index-section">
-            <h2 class="titre_2">les Jeunes Sapeurs Pompiers :</h2>
-            <p> Caserne de La Ferté-sous-Jouarre, CIS 183 (2020 - 2023) <a href="https://www.sdis77.fr/" target="_blank" rel="noopener noreferrer">SDIS 77</a></p>
-            <ul>
-                <li>
-                    Le parcours de JSP (Jeune Sapeur Pompier) est un programme de formation des jeunes volontaires agés de 12 à 16 ans (avec une année de marge pour les jeunes de 11 ans) 
-                    dans lequel des pompiers professionels nous enseignent les bases du métier de pompier à travers des exercices de pratiques avec du matériel opérationel, des cours 
-                    théoriques (geste de premiers secours, sécurité incendie, etc) et des entrainements physiques (course, natation, etc).
-                </li>
-                <li>
-                    J'y suis resté 3 ans sur les 4 que dure le parcours. J'y ait passé des formations secourismes, mais j'y ait surtout appris le sens du travail en équipe et de l'entraide, que j'essai d'appliquer.
-                </li>
-            </ul>
+        <section class="index-section reveal reveal-delay-1">
+            <div class="exp-header">
+                <div class="exp-icon">
+                    <i class="fas fa-fire-extinguisher"></i>
+                </div>
+                <div class="exp-meta">
+                    <h2 class="exp-org">Jeunes Sapeurs Pompiers</h2>
+                    <p class="exp-period">
+                        2020 – 2023 · Caserne de La Ferté-sous-Jouarre, CIS 183 ·
+                        <a href="https://www.sdis77.fr/" target="_blank" rel="noopener noreferrer">SDIS 77</a>
+                    </p>
+                </div>
+            </div>
+            <div class="exp-body">
+                <ul>
+                    <li>
+                        Le parcours de JSP (Jeune Sapeur Pompier) est un programme de formation des jeunes volontaires âgés de 12 à 16 ans dans lequel des pompiers professionnels enseignent les bases du métier à travers des exercices pratiques avec du matériel opérationnel, des cours théoriques (gestes de premiers secours, sécurité incendie) et des entraînements physiques (course, natation).
+                    </li>
+                    <li>
+                        3 ans de parcours sur les 4 que dure le programme. Formations secourisme, apprentissage du sens du travail en équipe et de l'entraide.
+                    </li>
+                </ul>
+            </div>
         </section>
 
-        <section class="index-section">
-            <h2 class="titre_2">Croix Rouge Française (2022)</h2>
-            <p></p>
-            <ul>
-                <li>
-                    La Croix Rouge est une organisation humanitaire qui vient en aide aux personnes en dificultés à travers le monde. J'ai participé à leurs action durant l'été
-                    2022 en tanr que bénévole dans la distribution de repas et de produits d'hygiène aux personnes sans-abris et dans le besoin dans le village de Quissac, en région Occitanie.
-                </li>
-            </ul>
+        <section class="index-section reveal reveal-delay-2">
+            <div class="exp-header">
+                <div class="exp-icon secondary">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <div class="exp-meta">
+                    <h2 class="exp-org">Croix Rouge Française</h2>
+                    <p class="exp-period">Été 2022 · Bénévole · Quissac, Occitanie</p>
+                </div>
+            </div>
+            <div class="exp-body">
+                <ul>
+                    <li>
+                        La Croix Rouge est une organisation humanitaire qui vient en aide aux personnes en difficultés à travers le monde.
+                    </li>
+                    <li>
+                        Participation bénévole durant l'été 2022 à la distribution de repas et de produits d'hygiène aux personnes sans-abris et dans le besoin dans le village de Quissac, en région Occitanie.
+                    </li>
+                </ul>
+            </div>
         </section>
     </div>
 
     <footer>
-        <p>&copy; 2026 Mon Portfolio. Tous droits réservés.</p>
-        <section class="footer-contact">
-            <h3>mes contacts :</h3>
-            <ul>
-                <li><a href="https://www.linkedin.com/in/eloan-delbroeuve/" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin" ></i> LinkedIn</a></li>
-                <li><a href="https://github.com/N4ole" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub personnel</a></li>
-                <li> <a href="https://github.com/Eloan-Supinfo" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> GitHub Supinfo</a></li>
-                <li><a href="mailto:eloandb@icloud.com"><i class="fas fa-envelope"></i> Email</a></li>
-            </ul>
-        </section>
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/eloan-delbroeuve/" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="https://github.com/N4ole" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> GitHub personnel
+                </a>
+                <a href="https://github.com/Eloan-Supinfo" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i> GitHub Supinfo
+                </a>
+                <a href="mailto:eloandb@icloud.com">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Eloan Delbroeuve. Tous droits réservés.</p>
+        </div>
     </footer>
 
     <script src="../js/script.js"></script>
