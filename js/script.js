@@ -1,9 +1,10 @@
+/* === THEME === */
 const THEME_KEY = "theme-preference";
 const toggleBtn = document.querySelector(".theme");
 
 function getPreferredTheme() {
-    const savedTheme = localStorage.getItem(THEME_KEY);
-    if (savedTheme === "light" || savedTheme === "dark") return savedTheme;
+    const saved = localStorage.getItem(THEME_KEY);
+    if (saved === "light" || saved === "dark") return saved;
     return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
@@ -22,11 +23,24 @@ function toggleTheme() {
 }
 
 applyTheme(getPreferredTheme());
+if (toggleBtn) toggleBtn.addEventListener("click", toggleTheme);
 
-if (toggleBtn) {
-    toggleBtn.addEventListener("click", toggleTheme);
-}
+/* === SCROLL REVEAL === */
+const revealObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+);
 
+document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
+
+/* === MESSAGE CHAR COUNTER === */
 const messageField = document.querySelector("#message");
 const messageCounter = document.querySelector("#message-counter");
 
@@ -34,8 +48,8 @@ if (messageField && messageCounter) {
     const maxLength = Number(messageField.getAttribute("maxlength") || 1000);
 
     const updateCounter = () => {
-        const currentLength = messageField.value.length;
-        messageCounter.textContent = `${currentLength}/${maxLength} caractères`;
+        const len = messageField.value.length;
+        messageCounter.textContent = `${len}/${maxLength} caractères`;
     };
 
     messageField.addEventListener("input", updateCounter);
