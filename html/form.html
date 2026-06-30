@@ -4,30 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Contactez Eloan Delbroeuve via ce formulaire.">
+    <link rel="canonical" href="https://exemple-a-remplacer.fr/html/form.html">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230369a1'/%3E%3Cstop offset='1' stop-color='%23047857'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='11' fill='url(%23g)'/%3E%3Ctext x='24' y='32' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='19' fill='%23fff' text-anchor='middle'%3EED%3C/text%3E%3C/svg%3E">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:title" content="Contact — Eloan Delbroeuve">
+    <meta property="og:description" content="Contactez Eloan Delbroeuve via ce formulaire.">
+    <meta property="og:url" content="https://exemple-a-remplacer.fr/html/form.html">
+    <meta property="og:image" content="https://exemple-a-remplacer.fr/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact — Eloan Delbroeuve">
+    <meta name="twitter:description" content="Contactez Eloan Delbroeuve via ce formulaire.">
+    <meta name="twitter:image" content="https://exemple-a-remplacer.fr/assets/og-image.png">
     <title>Contact — Portfolio</title>
     <link rel="stylesheet" href="../css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Eloan Delbroeuve",
+        "url": "https://exemple-a-remplacer.fr/index.html",
+        "jobTitle": "Étudiant en Master of Science",
+        "email": "mailto:eloandb@icloud.com",
+        "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "Supinfo"
+        },
+        "sameAs": [
+            "https://www.linkedin.com/in/eloan-delbroeuve/",
+            "https://github.com/N4ole",
+            "https://github.com/Eloan-Supinfo"
+        ]
+    }
+    </script>
 </head>
 <body>
+
+    <a href="#main" class="skip-link">Aller au contenu principal</a>
+
     <nav class="navbar">
+        <a href="../index.html" class="nav-brand">
+            <span class="nav-brand-mark" aria-hidden="true">ED</span>
+            <span class="nav-brand-name">Eloan</span>
+        </a>
         <ul>
             <li><a href="../index.html">Accueil</a></li>
             <li><a href="experience.html">Expériences</a></li>
-            <li><a href="form.html" class="active">Contact</a></li>
+            <li><a href="form.html" class="active" aria-current="page">Contact</a></li>
         </ul>
-        <button class="theme" type="button">Mode sombre</button>
+        <button class="theme" type="button" aria-pressed="false">Mode sombre</button>
     </nav>
 
     <h1 class="titre_1">Contact</h1>
 
-    <main class="contact-wrapper reveal">
+    <main id="main" class="contact-wrapper reveal">
         <section class="contact-card">
             <p class="contact-description">Remplissez le formulaire ci-dessous pour m'envoyer un message.</p>
-            <div id="contact-status" class="contact-status" hidden></div>
+            <div id="contact-status" class="contact-status" role="alert" aria-live="assertive" hidden></div>
 
             <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="fed97b4e-ac6f-42e2-b1a7-8854365c6805">
+
+                <input type="checkbox" name="botcheck" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
 
                 <div class="contact-form-row">
                     <div>
@@ -43,13 +86,13 @@
 
                 <div>
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" maxlength="1000" required></textarea>
-                    <p id="message-counter" class="char-counter"></p>
+                    <textarea id="message" name="message" maxlength="1000" required aria-describedby="message-counter"></textarea>
+                    <p id="message-counter" class="char-counter" aria-live="polite"></p>
                 </div>
 
                 <div class="contact-form-actions">
                     <button class="contact-submit" type="submit">
-                        <i class="fas fa-paper-plane" style="margin-right:8px"></i>Envoyer
+                        <i class="fas fa-paper-plane" style="margin-right:8px" aria-hidden="true"></i>Envoyer
                     </button>
                 </div>
             </form>
@@ -60,17 +103,21 @@
         <div class="footer-inner">
             <div class="footer-links">
                 <a href="https://www.linkedin.com/in/eloan-delbroeuve/" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-linkedin"></i> LinkedIn
+                    <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn<span class="sr-only"> (nouvel onglet)</span>
                 </a>
                 <a href="https://github.com/N4ole" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i> GitHub personnel
+                    <i class="fab fa-github" aria-hidden="true"></i> GitHub personnel<span class="sr-only"> (nouvel onglet)</span>
                 </a>
                 <a href="https://github.com/Eloan-Supinfo" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i> GitHub Supinfo
+                    <i class="fab fa-github" aria-hidden="true"></i> GitHub Supinfo<span class="sr-only"> (nouvel onglet)</span>
                 </a>
                 <a href="mailto:eloandb@icloud.com">
-                    <i class="fas fa-envelope"></i> Email
+                    <i class="fas fa-envelope" aria-hidden="true"></i> Email
                 </a>
+            </div>
+            <div class="footer-legal">
+                <a href="mentions-legales.html">Mentions légales</a>
+                <a href="confidentialite.html">Confidentialité</a>
             </div>
             <p class="footer-copy">&copy; 2026 Eloan Delbroeuve. Tous droits réservés.</p>
         </div>

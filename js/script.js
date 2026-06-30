@@ -12,6 +12,7 @@ function applyTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
     if (toggleBtn) {
         toggleBtn.textContent = theme === "dark" ? "Mode clair" : "Mode sombre";
+        toggleBtn.setAttribute("aria-pressed", theme === "dark");
     }
 }
 
