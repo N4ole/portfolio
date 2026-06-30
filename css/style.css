@@ -17,6 +17,17 @@
     --surface:         #ffffff;
     --surface-2:       #eef5fa;
     --border:          #dde8ef;
+    /* Variantes assombries pour le texte/icônes colorés (liens, badges, tags) :
+       --primary/--secondary/--accent/--error sont trop clairs pour atteindre
+       le ratio WCAG AA (4.5:1) en texte sur fond clair. */
+    --link:               #0369a1;
+    --secondary-strong:   #047857;
+    --accent-strong:      #c2410c;
+    --error-strong:       #b91c1c;
+    /* Fonds pleins/dégradés sous texte ou icônes blancs (boutons, badges) */
+    --primary-contrast:      #0369a1;
+    --primary-contrast-dark: #075985;
+    --secondary-contrast:    #047857;
     --shadow-sm:       0 1px 4px rgba(20,36,51,0.06), 0 2px 8px rgba(20,36,51,0.04);
     --shadow-md:       0 6px 18px rgba(20,36,51,0.10), 0 2px 6px rgba(20,36,51,0.05);
     --shadow-lg:       0 18px 50px rgba(20,36,51,0.14);
@@ -50,6 +61,11 @@
     --shadow-md:       0 8px 22px rgba(0,0,0,0.55);
     --shadow-lg:       0 22px 60px rgba(0,0,0,0.6);
     --shadow-primary:  0 4px 20px rgba(56, 189, 248, 0.2);
+    /* En sombre, les couleurs vives passent déjà le ratio AA : pas besoin de les assombrir */
+    --link:               var(--primary);
+    --secondary-strong:   var(--secondary);
+    --accent-strong:      var(--accent);
+    --error-strong:       var(--error);
 }
 
 /* === RESET & BASE === */
@@ -68,6 +84,40 @@ body {
     color: var(--text);
     transition: background-color var(--transition), color var(--transition);
     line-height: 1.65;
+}
+
+/* === ACCESSIBILITÉ : utilitaires === */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 1000;
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 10px 18px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    box-shadow: var(--shadow-md);
+    transition: top var(--transition);
+}
+
+.skip-link:focus {
+    top: 12px;
 }
 
 /* === NAVBAR === */
@@ -102,7 +152,7 @@ body {
     width: 30px;
     height: 30px;
     border-radius: 8px;
-    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    background: linear-gradient(135deg, var(--primary-contrast), var(--secondary-contrast));
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
@@ -145,7 +195,7 @@ body {
 
 .navbar a:hover,
 .navbar a.active {
-    color: var(--primary);
+    color: var(--link);
     background-color: var(--primary-light);
 }
 
@@ -168,8 +218,8 @@ body {
 
 .theme:hover {
     background-color: var(--primary-light);
-    color: var(--primary);
-    border-color: var(--primary);
+    color: var(--link);
+    border-color: var(--link);
 }
 
 /* === HERO === */
@@ -216,6 +266,15 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
     .hero-bubble { animation: none; }
+    .reveal {
+        transition: none;
+        opacity: 1;
+        transform: none;
+    }
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 /* Vague de transition entre le hero et le contenu */
@@ -243,7 +302,7 @@ body {
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--primary);
+    color: var(--link);
     margin-bottom: 14px;
 }
 
@@ -267,7 +326,7 @@ body {
 }
 
 .hero-sub a {
-    color: var(--primary);
+    color: var(--link);
     text-decoration: none;
     font-weight: 500;
 }
@@ -298,7 +357,7 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-contrast) 0%, var(--primary-contrast-dark) 100%);
     color: #fff;
     box-shadow: var(--shadow-primary);
 }
@@ -309,8 +368,8 @@ body {
 
 .btn-outline {
     background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
+    color: var(--link);
+    border: 2px solid var(--link);
 }
 .btn-outline:hover {
     background: var(--primary-light);
@@ -342,9 +401,9 @@ body {
     box-shadow: var(--shadow-sm);
 }
 .hero-social a:hover {
-    background: var(--primary);
+    background: var(--primary-contrast);
     color: #fff;
-    border-color: var(--primary);
+    border-color: var(--primary-contrast);
     transform: translateY(-3px);
     box-shadow: var(--shadow-primary);
 }
@@ -386,7 +445,7 @@ body {
     font-weight: 700;
     font-size: 0.8rem;
     line-height: 1;
-    color: var(--primary);
+    color: var(--link);
 }
 
 .section-eyebrow-label {
@@ -436,7 +495,7 @@ body {
 }
 
 .index-section a {
-    color: var(--primary);
+    color: var(--link);
     text-decoration: none;
     font-weight: 500;
 }
@@ -462,14 +521,14 @@ body {
     padding: 3px 10px;
     border-radius: 100px;
     background: var(--primary-light);
-    color: var(--primary);
+    color: var(--link);
     text-transform: uppercase;
     letter-spacing: 0.06em;
 }
 
 .project-tag.accent {
     background: var(--accent-light);
-    color: var(--accent);
+    color: var(--accent-strong);
 }
 
 .project-desc {
@@ -482,7 +541,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: var(--primary) !important;
+    color: var(--link) !important;
     font-weight: 600;
     font-size: 1rem;
 }
@@ -539,7 +598,7 @@ body {
 .timeline-period {
     font-size: 0.78rem;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--link);
     text-transform: uppercase;
     letter-spacing: 0.09em;
     margin-bottom: 3px;
@@ -558,7 +617,7 @@ body {
     font-weight: 600;
 }
 .timeline-title a:hover {
-    color: var(--primary) !important;
+    color: var(--link) !important;
     text-decoration: none !important;
 }
 
@@ -581,7 +640,7 @@ body {
     height: 50px;
     border-radius: var(--radius-sm);
     background: var(--primary-light);
-    color: var(--primary);
+    color: var(--link);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -590,7 +649,7 @@ body {
 
 .exp-icon.secondary {
     background: var(--secondary-light);
-    color: var(--secondary);
+    color: var(--secondary-strong);
 }
 
 .exp-meta { flex: 1; }
@@ -609,7 +668,7 @@ body {
     margin: 0;
 }
 .exp-period a {
-    color: var(--primary) !important;
+    color: var(--link) !important;
     text-decoration: none;
     font-weight: 500;
 }
@@ -634,7 +693,7 @@ body {
     content: '›';
     position: absolute;
     left: 0;
-    color: var(--primary);
+    color: var(--link);
     font-weight: 700;
     font-size: 1.1rem;
     line-height: 1.4;
@@ -679,9 +738,29 @@ footer {
     transition: all var(--transition);
 }
 .footer-links a:hover {
-    color: var(--primary);
-    border-color: var(--primary);
+    color: var(--link);
+    border-color: var(--link);
     background: var(--primary-light);
+}
+
+.footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+}
+
+.footer-legal a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    transition: color var(--transition);
+}
+
+.footer-legal a:hover,
+.footer-legal a.active {
+    color: var(--link);
+    text-decoration: underline;
 }
 
 .footer-copy {
@@ -772,7 +851,7 @@ footer {
 }
 
 .contact-submit {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary-contrast) 0%, var(--primary-contrast-dark) 100%);
     color: #ffffff;
     border: none;
     border-radius: var(--radius-sm);
@@ -799,12 +878,12 @@ footer {
 .contact-status.success {
     background-color: var(--secondary-light);
     border-color: var(--secondary);
-    color: var(--secondary);
+    color: var(--secondary-strong);
 }
 .contact-status.error {
     background-color: var(--error-light);
     border-color: var(--error);
-    color: var(--error);
+    color: var(--error-strong);
 }
 
 .honeypot-field {

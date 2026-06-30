@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://exemple-a-remplacer.fr/sitemap.xml
