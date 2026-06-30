@@ -1,20 +1,26 @@
-/* === VARIABLES === */
+/* === VARIABLES ===
+   Identité "air & ciel" : bleu ciel (qualité de l'air), vert feuille (nature),
+   orange coucher de soleil (accent chaleureux), bleu nuit profond en sombre. */
 :root {
-    --primary:         #3498db;
-    --primary-dark:    #2980b9;
-    --primary-light:   rgba(52, 152, 219, 0.12);
-    --secondary:       #2ecc71;
-    --secondary-light: rgba(46, 204, 113, 0.12);
-    --accent:          #e74c3c;
-    --text:            #1e2330;
-    --text-muted:      #64748b;
-    --bg:              #f5f7fa;
+    --primary:         #0ea5e9;  /* ciel */
+    --primary-dark:    #0284c7;
+    --primary-light:   rgba(14, 165, 233, 0.12);
+    --secondary:       #10b981; /* feuille */
+    --secondary-light: rgba(16, 185, 129, 0.12);
+    --accent:          #fb923c; /* coucher de soleil, usage décoratif */
+    --accent-light:    rgba(251, 146, 60, 0.14);
+    --error:           #ef4444;
+    --error-light:     rgba(239, 68, 68, 0.1);
+    --text:            #142433;
+    --text-muted:      #5b7184;
+    --bg:              #f3f8fb;
     --surface:         #ffffff;
-    --border:          #e2e8f0;
-    --shadow-sm:       0 1px 4px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.04);
-    --shadow-md:       0 4px 12px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
-    --shadow-primary:  0 4px 20px rgba(52, 152, 219, 0.25);
+    --border:          #dde8ef;
+    --shadow-sm:       0 1px 4px rgba(20,36,51,0.06), 0 2px 8px rgba(20,36,51,0.04);
+    --shadow-md:       0 4px 12px rgba(20,36,51,0.09), 0 2px 6px rgba(20,36,51,0.05);
+    --shadow-primary:  0 4px 20px rgba(14, 165, 233, 0.25);
     --font:            'Roboto', system-ui, Arial, sans-serif;
+    --font-display:    'Outfit', var(--font);
     --radius-sm:       8px;
     --radius:          14px;
     --ease:            cubic-bezier(0.4, 0, 0.2, 1);
@@ -22,20 +28,23 @@
 }
 
 [data-theme="dark"] {
-    --primary:         #60a5fa;
-    --primary-dark:    #3b82f6;
-    --primary-light:   rgba(96, 165, 250, 0.12);
+    --primary:         #38bdf8;
+    --primary-dark:    #0ea5e9;
+    --primary-light:   rgba(56, 189, 248, 0.14);
     --secondary:       #34d399;
-    --secondary-light: rgba(52, 211, 153, 0.12);
-    --accent:          #f87171;
-    --text:            #e2e8f0;
-    --text-muted:      #94a3b8;
-    --bg:              #0d1117;
-    --surface:         #161b27;
-    --border:          #2a3444;
+    --secondary-light: rgba(52, 211, 153, 0.14);
+    --accent:          #fdba74;
+    --accent-light:    rgba(253, 186, 116, 0.14);
+    --error:           #f87171;
+    --error-light:     rgba(248, 113, 113, 0.12);
+    --text:            #e6eef4;
+    --text-muted:      #94a8b8;
+    --bg:              #0a141f;
+    --surface:         #11202e;
+    --border:          #1f3344;
     --shadow-sm:       0 1px 4px rgba(0,0,0,0.5);
     --shadow-md:       0 4px 12px rgba(0,0,0,0.6);
-    --shadow-primary:  0 4px 20px rgba(96, 165, 250, 0.2);
+    --shadow-primary:  0 4px 20px rgba(56, 189, 248, 0.2);
 }
 
 /* === RESET & BASE === */
@@ -62,12 +71,13 @@ body {
     top: 0;
     z-index: 100;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    gap: 16px;
     background-color: var(--surface);
     border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    height: 58px;
+    padding: 10px 24px;
     backdrop-filter: blur(12px);
     box-shadow: var(--shadow-sm);
     transition: background-color var(--transition), border-color var(--transition);
@@ -75,9 +85,11 @@ body {
 
 .navbar ul {
     display: flex;
+    flex-wrap: wrap;
     list-style: none;
     gap: 4px;
     align-items: center;
+    justify-content: center;
     padding: 0;
     margin: 0;
 }
@@ -102,10 +114,6 @@ body {
 
 /* === THEME TOGGLE === */
 .theme {
-    position: fixed;
-    top: 11px;
-    right: 16px;
-    z-index: 200;
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
@@ -115,6 +123,7 @@ body {
     font-size: 0.82rem;
     font-weight: 500;
     font-family: var(--font);
+    white-space: nowrap;
     transition: background-color var(--transition), color var(--transition),
                 border-color var(--transition), box-shadow var(--transition);
     box-shadow: var(--shadow-sm);
@@ -130,11 +139,12 @@ body {
 .hero {
     position: relative;
     overflow: hidden;
-    padding: 90px 24px 70px;
+    padding: 90px 24px 96px;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 9%, var(--bg)) 0%, var(--bg) 100%);
 }
 
 .hero::before {
@@ -142,20 +152,46 @@ body {
     position: absolute;
     inset: 0;
     background:
-        radial-gradient(ellipse 65% 65% at 15% 55%, rgba(52,152,219,0.14) 0%, transparent 70%),
-        radial-gradient(ellipse 55% 55% at 85% 40%, rgba(46,204,113,0.09) 0%, transparent 70%);
+        radial-gradient(ellipse 65% 65% at 15% 50%, rgba(14,165,233,0.16) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 55% at 85% 35%, rgba(16,185,129,0.1) 0%, transparent 70%);
     pointer-events: none;
 }
 
-.hero::after {
-    content: '';
+/* Bulles d'air flottantes : clin d'oeil au thème "qualité de l'air" */
+.hero-bubble {
     position: absolute;
-    inset: 0;
-    background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
-    background-size: 28px 28px;
-    opacity: 0.45;
+    border-radius: 50%;
+    filter: blur(1px);
     pointer-events: none;
+    animation: bubble-float ease-in-out infinite;
+    z-index: 0;
 }
+.hero-bubble.b1 { width: 64px;  height: 64px; left: 7%;  top: 18%; background: var(--primary); opacity: 0.3;  animation-duration: 9s; }
+.hero-bubble.b2 { width: 34px;  height: 34px; left: 17%; top: 68%; background: var(--secondary); opacity: 0.35; animation-duration: 7s; animation-delay: 1s; }
+.hero-bubble.b3 { width: 86px;  height: 86px; right: 9%; top: 14%; background: var(--accent); opacity: 0.18; animation-duration: 11s; animation-delay: 0.5s; }
+.hero-bubble.b4 { width: 26px;  height: 26px; right: 20%; top: 62%; background: var(--secondary); opacity: 0.3; animation-duration: 6.5s; animation-delay: 2s; }
+.hero-bubble.b5 { width: 46px;  height: 46px; right: 34%; top: 78%; background: var(--primary); opacity: 0.22; animation-duration: 10s; animation-delay: 1.5s; }
+
+@keyframes bubble-float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50%      { transform: translateY(-22px) translateX(8px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-bubble { animation: none; }
+}
+
+/* Vague de transition entre le hero et le contenu */
+.hero-wave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    line-height: 0;
+    z-index: 0;
+}
+.hero-wave svg { width: 100%; height: 56px; display: block; }
+.hero-wave path { fill: var(--bg); }
 
 .hero-content {
     position: relative;
@@ -175,6 +211,7 @@ body {
 }
 
 .hero-name {
+    font-family: var(--font-display);
     font-size: clamp(2.4rem, 5.5vw, 4.2rem);
     font-weight: 700;
     line-height: 1.1;
@@ -230,7 +267,7 @@ body {
 }
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 6px 24px rgba(14, 165, 233, 0.4);
 }
 
 .btn-outline {
@@ -277,6 +314,7 @@ body {
 
 /* === PAGE TITLE (expériences, contact) === */
 .titre_1 {
+    font-family: var(--font-display);
     font-size: clamp(1.8rem, 3.5vw, 2.6rem);
     font-weight: 700;
     text-align: center;
@@ -288,8 +326,9 @@ body {
 }
 
 .titre_2 {
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
     color: var(--text);
     margin-bottom: 12px;
     display: flex;
@@ -367,6 +406,11 @@ body {
     letter-spacing: 0.06em;
 }
 
+.project-tag.accent {
+    background: var(--accent-light);
+    color: var(--accent);
+}
+
 .project-desc {
     margin-top: 10px;
     color: var(--text);
@@ -441,9 +485,10 @@ body {
 }
 
 .timeline-title {
+    font-family: var(--font-display);
     font-weight: 600;
     color: var(--text);
-    font-size: 1rem;
+    font-size: 1.02rem;
     margin-bottom: 3px;
 }
 .timeline-title a {
@@ -490,8 +535,9 @@ body {
 .exp-meta { flex: 1; }
 
 .exp-org {
-    font-weight: 700;
-    font-size: 1.05rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
     color: var(--text);
     margin: 0 0 4px;
 }
@@ -679,7 +725,7 @@ footer {
 }
 .contact-submit:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(52, 152, 219, 0.4);
+    box-shadow: 0 6px 24px rgba(14, 165, 233, 0.4);
 }
 
 .contact-status {
@@ -695,9 +741,9 @@ footer {
     color: var(--secondary);
 }
 .contact-status.error {
-    background-color: rgba(231, 76, 60, 0.1);
-    border-color: var(--accent);
-    color: var(--accent);
+    background-color: var(--error-light);
+    border-color: var(--error);
+    color: var(--error);
 }
 
 .honeypot-field {
