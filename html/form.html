@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contactez Eloan Delbroeuve via ce formulaire.">
+    <meta name="description" content="Contactez Eloan Delbroeuve, étudiant en Master of Science à Supinfo et développeur web, via le formulaire de contact de ce portfolio personnel.">
     <link rel="canonical" href="https://exemple-a-remplacer.fr/html/form.html">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%230369a1'/%3E%3Cstop offset='1' stop-color='%23047857'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='48' height='48' rx='11' fill='url(%23g)'/%3E%3Ctext x='24' y='32' font-family='Arial,Helvetica,sans-serif' font-weight='800' font-size='19' fill='%23fff' text-anchor='middle'%3EED%3C/text%3E%3C/svg%3E">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="fr_FR">
     <meta property="og:title" content="Contact — Eloan Delbroeuve">
-    <meta property="og:description" content="Contactez Eloan Delbroeuve via ce formulaire.">
+    <meta property="og:description" content="Contactez Eloan Delbroeuve, étudiant en Master of Science à Supinfo et développeur web, via le formulaire de contact de ce portfolio personnel.">
     <meta property="og:url" content="https://exemple-a-remplacer.fr/html/form.html">
     <meta property="og:image" content="https://exemple-a-remplacer.fr/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Contact — Eloan Delbroeuve">
-    <meta name="twitter:description" content="Contactez Eloan Delbroeuve via ce formulaire.">
+    <meta name="twitter:description" content="Contactez Eloan Delbroeuve, étudiant en Master of Science à Supinfo et développeur web, via le formulaire de contact de ce portfolio personnel.">
     <meta name="twitter:image" content="https://exemple-a-remplacer.fr/assets/og-image.png">
     <title>Contact — Portfolio</title>
     <link rel="stylesheet" href="../css/style.css">
@@ -22,7 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -67,7 +69,7 @@
             <p class="contact-description">Remplissez le formulaire ci-dessous pour m'envoyer un message.</p>
             <div id="contact-status" class="contact-status" role="alert" aria-live="assertive" hidden></div>
 
-            <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <form id="contact-form" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="fed97b4e-ac6f-42e2-b1a7-8854365c6805">
 
                 <input type="checkbox" name="botcheck" class="honeypot-field" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -126,26 +128,44 @@
     <script src="../js/script.js"></script>
     <script>
         (function () {
+            const form = document.getElementById("contact-form");
             const statusBox = document.getElementById("contact-status");
-            const params = new URLSearchParams(window.location.search);
-            const status = params.get("status");
+            if (!form || !statusBox) return;
 
-            if (!statusBox || !status) return;
+            function showStatus(kind, text) {
+                statusBox.hidden = false;
+                statusBox.classList.remove("success", "error");
+                statusBox.classList.add(kind);
+                statusBox.textContent = text;
+            }
 
-            const map = {
-                success:          { css: "success", text: "Message envoyé avec succès. Merci pour votre contact." },
-                validation_error: { css: "error",   text: "Vérifiez les champs du formulaire puis réessayez." },
-                db_error:         { css: "error",   text: "Erreur lors de l'enregistrement en base de données." },
-                mail_error:       { css: "error",   text: "Impossible d'envoyer l'email pour le moment." },
-                server_error:     { css: "error",   text: "Une erreur serveur est survenue." }
-            };
+            form.addEventListener("submit", async function (event) {
+                event.preventDefault();
+                const submitBtn = form.querySelector(".contact-submit");
+                if (submitBtn) submitBtn.disabled = true;
 
-            const item = map[status];
-            if (!item) return;
+                try {
+                    const response = await fetch(form.action, {
+                        method: "POST",
+                        body: new FormData(form),
+                        headers: { Accept: "application/json" }
+                    });
+                    const result = await response.json();
 
-            statusBox.hidden = false;
-            statusBox.classList.add(item.css);
-            statusBox.textContent = item.text;
+                    if (response.ok && result.success) {
+                        showStatus("success", "Message envoyé avec succès. Merci pour votre contact.");
+                        form.reset();
+                        const messageField = form.querySelector("#message");
+                        if (messageField) messageField.dispatchEvent(new Event("input"));
+                    } else {
+                        showStatus("error", result.message || "Une erreur est survenue. Merci de réessayer.");
+                    }
+                } catch (err) {
+                    showStatus("error", "Impossible d'envoyer le message pour le moment. Vérifiez votre connexion et réessayez.");
+                } finally {
+                    if (submitBtn) submitBtn.disabled = false;
+                }
+            });
         })();
     </script>
 </body>
